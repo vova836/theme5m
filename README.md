@@ -1,12 +1,50 @@
-using System;
+ using System;
 
-class DistanceProblem
+class AlgebraicExpression
 {
-    public int CalculateDistance(int v1, int v2, int L)
+    private Polynomial numerator;
+    private Polynomial denominator;
+
+    public AlgebraicExpression(Polynomial numerator, Polynomial denominator)
     {
-        int time = L / (v2 - v1);
-        int distance = v2 * time;
-        return distance;
+        this.numerator = numerator;
+        this.denominator = denominator;
+    }
+
+    public AlgebraicExpression(int[] numeratorCoefficients, int[] denominatorCoefficients)
+    {
+        this.numerator = new Polynomial(numeratorCoefficients);
+        this.denominator = new Polynomial(denominatorCoefficients);
+    }
+
+    public double CalculateValue(double x)
+    {
+        if (denominator.Evaluate(x) == 0)
+        {
+            Console.WriteLine("Ошибка: деление на ноль");
+            return 0;
+        }
+        return numerator.Evaluate(x) / denominator.Evaluate(x);
+    }
+}
+
+class Polynomial
+{
+    private int[] coefficients;
+
+    public Polynomial(int[] coefficients)
+    {
+        this.coefficients = coefficients;
+    }
+
+    public double Evaluate(double x)
+    {
+        double result = 0;
+        for (int i = 0; i < coefficients.Length; i++)
+        {
+            result += coefficients[i] * Math.Pow(x, i);
+        }
+        return result;
     }
 }
 
@@ -14,13 +52,142 @@ class Program
 {
     static void Main()
     {
-        int v1 = 10; // скорость велосипедиста
-        int v2 = 20; // скорость мотоциклиста
-        int L = 30; // расстояние между пунктами A и B
+        int[] numeratorCoefficients = { 1, 2, 3 }; // Пример коэффициентов для числителя
+        int[] denominatorCoefficients = { 4, 5 }; // Пример коэффициентов для знаменателя
 
-        DistanceProblem problem = new DistanceProblem();
-        int distance = problem.CalculateDistance(v1, v2, L);
+        AlgebraicExpression expression = new AlgebraicExpression(numeratorCoefficients, denominatorCoefficients);
 
-        Console.WriteLine("Мотоциклист догонит велосипедиста на расстоянии: " + distance + " км от пункта A.");
+        double x = 2.5; // Пример значения x
+        double result = expression.CalculateValue(x);
+
+        Console.WriteLine($"Значение выражения при x = {x}: {result}");
+    }
+}using System;
+
+class AlgebraicExpression
+{
+    private Polynomial numerator;
+    private Polynomial denominator;
+
+    public AlgebraicExpression(Polynomial numerator, Polynomial denominator)
+    {
+        this.numerator = numerator;
+        this.denominator = denominator;
+    }
+
+    public AlgebraicExpression(int[] numeratorCoefficients, int[] denominatorCoefficients)
+    {
+        this.numerator = new Polynomial(numeratorCoefficients);
+        this.denominator = new Polynomial(denominatorCoefficients);
+    }
+
+    public double CalculateValue(double x)
+    {
+        if (denominator.Evaluate(x) == 0)
+        {
+            Console.WriteLine("Ошибка: деление на ноль");
+            return 0;
+        }
+        return numerator.Evaluate(x) / denominator.Evaluate(x);
+    }
+}
+
+class Polynomial
+{
+    private int[] coefficients;
+
+    public Polynomial(int[] coefficients)
+    {
+        this.coefficients = coefficients;
+    }
+
+    public double Evaluate(double x)
+    {
+        double result = 0;
+        for (int i = 0; i < coefficients.Length; i++)
+        {
+            result += coefficients[i] * Math.Pow(x, i);
+        }
+        return result;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        int[] numeratorCoefficients = { 1, 2, 3 }; // Пример коэффициентов для числителя
+        int[] denominatorCoefficients = { 4, 5 }; // Пример коэффициентов для знаменателя
+
+        AlgebraicExpression expression = new AlgebraicExpression(numeratorCoefficients, denominatorCoefficients);
+
+        double x = 2.5; // Пример значения x
+        double result = expression.CalculateValue(x);
+
+        Console.WriteLine($"Значение выражения при x = {x}: {result}");
+    }
+}using System;
+
+class AlgebraicExpression
+{
+    private Polynomial numerator;
+    private Polynomial denominator;
+
+    public AlgebraicExpression(Polynomial numerator, Polynomial denominator)
+    {
+        this.numerator = numerator;
+        this.denominator = denominator;
+    }
+
+    public AlgebraicExpression(int[] numeratorCoefficients, int[] denominatorCoefficients)
+    {
+        this.numerator = new Polynomial(numeratorCoefficients);
+        this.denominator = new Polynomial(denominatorCoefficients);
+    }
+
+    public double CalculateValue(double x)
+    {
+        if (denominator.Evaluate(x) == 0)
+        {
+            Console.WriteLine("Ошибка: деление на ноль");
+            return 0;
+        }
+        return numerator.Evaluate(x) / denominator.Evaluate(x);
+    }
+}
+
+class Polynomial
+{
+    private int[] coefficients;
+
+    public Polynomial(int[] coefficients)
+    {
+        this.coefficients = coefficients;
+    }
+
+    public double Evaluate(double x)
+    {
+        double result = 0;
+        for (int i = 0; i < coefficients.Length; i++)
+        {
+            result += coefficients[i] * Math.Pow(x, i);
+        }
+        return result;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        int[] numeratorCoefficients = { 1, 2, 3 }; // Пример коэффициентов для числителя
+        int[] denominatorCoefficients = { 4, 5 }; // Пример коэффициентов для знаменателя
+
+        AlgebraicExpression expression = new AlgebraicExpression(numeratorCoefficients, denominatorCoefficients);
+
+        double x = 2.5; // Пример значения x
+        double result = expression.CalculateValue(x);
+
+        Console.WriteLine($"Значение выражения при x = {x}: {result}");
     }
 }
